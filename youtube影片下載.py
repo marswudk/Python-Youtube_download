@@ -14,10 +14,13 @@ def progress(stream, chunk, file_handle, bytes_remaining):
     print('\r' + '[Download progress]:[%s%s]%.2f%%;' % (
     '█' * int(size*20/contentSize), ' '*(20-int(size*20/contentSize)), float(size/contentSize*100)), end='')
 
-url = input('請輸入要下載的影片網址')  #要下載的影片網址
+#要下載的影片網址
+url = input('請輸入要下載的影片網址')
 yt = YouTube(url,on_progress_callback=progress)
-count = yt.streams.count()  #用count方法抓到影片格式的數量
-print(yt.title + '影片格式共有：'+ str(count) + '種')  #要記得將count轉為字串格式
+#用count方法抓到影片格式的數量
+count = yt.streams.count()  
+#要記得將count轉為字串格式
+print(yt.title + '影片格式共有：'+ str(count) + '種')  
 print( 'mp4 360p 影片下載中，請稍後') 
 yt.streams.filter(subtype='mp4',res='360p',progressive=True).first().download(pathdir)
 #用filter篩選影片格式及解析度等，再下載第一個符合條件的影片，並下載到指定資料夾
